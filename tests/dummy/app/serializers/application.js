@@ -1,10 +1,6 @@
 import DS from 'ember-data';
-import { underscore } from '@ember/string';
+import MongoDB from 'ember-blueprint-data/mixins/serializers/mongodb';
 
-export default DS.RESTSerializer.extend({
-  primaryKey: '_id',
+export default DS.RESTSerializer.extend (MongoDB, {
 
-  keyForAttribute: function (key) {
-    return underscore (key);
-  }
 });
