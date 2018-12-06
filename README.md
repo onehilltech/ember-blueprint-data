@@ -24,6 +24,7 @@ provides the following functionality:
 * It only serializes `belongsTo` relationships that exist, and have changed.
 * It does not serialize attributes that have `serialize:false` as part of its attribute definition.
 * It normalizes the `queryRecord` response by converting it from an array to a single value.
+* It extends the `Store` and `RESTAdapter` with support for the `search()` action on a MongoDB `ResourceController`.
 
 Use the MongoDB mixin by importing it into a serializer, such as the application
 serializer, and applying it to the extended class.
