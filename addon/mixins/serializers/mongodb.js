@@ -1,4 +1,5 @@
 import Mixin from '@ember/object/mixin';
+import ResourceStat from '../../resource-stat';
 
 import { underscore } from '@ember/string';
 import { isPresent, isNone } from '@ember/utils';
@@ -65,6 +66,36 @@ export default Mixin.create ({
     }
   },
 
+  normalizeSingleResponse (store, primaryModelClass, payload, id, requestType) {
+    // Let the base class create the default response.
+    let response = this._super (...arguments);
+
+    const keys = Object.keys (payload);
+
+    for (let i = 0; i < keys.length; ++ i) {
+      const key = keys[i];
+      const singular = singularize (key);
+      const isPrimaryType = this.isPrimaryType (store, singular, primaryModelClass);
+
+      if (isPrimaryType) {
+        let resource = payload[key];
+
+        if (Array.isArray (resource)) {
+          resource = resource.length > 0 ? resource[0] : undefined;
+        }
+
+        if (resource && resource._stat) {
+          let stat = this._normalizeResourceStat (resource._stat);
+          response.data.attributes.stat = stat;
+        }
+
+        break;
+      }
+    }
+
+    return response;
+  },
+
   /**
    * Normalize a query record response by converting the plural envelope to a
    * singular envelope.
@@ -85,5 +116,23 @@ export default Mixin.create ({
     delete payload[plural];
 
     return this._super (store, primaryModelClass, payload, id, requestType);
+  },
+
+  _normalizeResourceStat (payload) {
+    let stat = {};
+
+    if (payload.created_at) {
+      stat.createdAt = new Date (payload.created_at);
+    }
+
+    if (payload.updated_at) {
+      stat.updatedAt = new Date (payload.updated_at);
+    }
+
+    if (payload.deleted_at) {
+      stat.deletedAt = new Date (payload.deleted_at);
+    }
+
+    return stat;
   }
 });
