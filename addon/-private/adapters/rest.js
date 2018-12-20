@@ -1,4 +1,26 @@
 export default {
+  buildQuery (snapshot) {
+    let query = this._super (...arguments);
+
+    const { adapterOptions } = snapshot;
+
+    if (adapterOptions) {
+      // Handle the directives placed under the adapter options.
+
+      let directives = {};
+
+      if (adapterOptions.populate) {
+        directives.populate = true;
+      }
+
+      if (Object.keys (directives).length) {
+        query._ = directives;
+      }
+    }
+
+    return query;
+  },
+
   search (store, type, query) {
     let url = this.buildURL (type.modelName, null, null, 'search', query);
     url += '/search';
