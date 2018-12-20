@@ -57,8 +57,14 @@ export default Mixin.create ({
    */
   serializeBelongsTo (snapshot, json, relationship) {
     let key = relationship.key;
-    let belongsTo = snapshot.belongsTo (key);
 
+    const changed = snapshot.changedAttributes ();
+
+    if (isNone (changed[key])) {
+      return;
+    }
+
+    let belongsTo = snapshot.belongsTo (key);
     key = this.keyForRelationship ? this.keyForRelationship (key, "belongsTo", "serialize") : key;
 
     if (!isNone (belongsTo)) {
