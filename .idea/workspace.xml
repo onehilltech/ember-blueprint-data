@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="455a154a-5cc8-4654-80ac-2c1ef54a9a15" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/addon/-private/model/changed-attributes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addon/initializers/ember-blueprint-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/initializers/ember-blueprint-data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/addon/mixins/serializers/mongodb.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/mixins/serializers/mongodb.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bower_components.ember-try/" />
     <ignored path="$PROJECT_DIR$/.node_modules.ember-try/" />
@@ -47,7 +45,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="hbs" value="93" />
-          <entry key="js" value="4541" />
+          <entry key="js" value="4546" />
           <entry key="json" value="151" />
         </counts>
       </usages-collector>
@@ -55,7 +53,7 @@
         <counts>
           <entry key="Handlebars/Mustache" value="93" />
           <entry key="JSON" value="151" />
-          <entry key="JavaScript" value="4541" />
+          <entry key="JavaScript" value="4546" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -101,11 +99,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/addon/initializers/ember-blueprint-data.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="195">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -122,11 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/addon/mixins/serializers/mongodb.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1794">
-              <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
+            <state relative-caret-position="81">
+              <caret line="58" column="31" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -171,9 +169,9 @@
         <option value="$PROJECT_DIR$/addon/-private/stat.js" />
         <option value="$PROJECT_DIR$/addon/index.js" />
         <option value="$PROJECT_DIR$/addon/resource.js" />
-        <option value="$PROJECT_DIR$/addon/mixins/serializers/mongodb.js" />
         <option value="$PROJECT_DIR$/addon/-private/model/changed-attributes.js" />
         <option value="$PROJECT_DIR$/addon/initializers/ember-blueprint-data.js" />
+        <option value="$PROJECT_DIR$/addon/mixins/serializers/mongodb.js" />
       </list>
     </option>
   </component>
@@ -211,33 +209,6 @@
               <item name="ember-blueprint-data" type="b2602c69:ProjectViewProjectNode" />
               <item name="ember-blueprint-data" type="462c0819:PsiDirectoryNode" />
               <item name="addon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-blueprint-data" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-blueprint-data" type="462c0819:PsiDirectoryNode" />
-              <item name="addon" type="462c0819:PsiDirectoryNode" />
-              <item name="-private" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-blueprint-data" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-blueprint-data" type="462c0819:PsiDirectoryNode" />
-              <item name="addon" type="462c0819:PsiDirectoryNode" />
-              <item name="-private" type="462c0819:PsiDirectoryNode" />
-              <item name="adapters" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-blueprint-data" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-blueprint-data" type="462c0819:PsiDirectoryNode" />
-              <item name="addon" type="462c0819:PsiDirectoryNode" />
-              <item name="-private" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-blueprint-data" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-blueprint-data" type="462c0819:PsiDirectoryNode" />
-              <item name="addon" type="462c0819:PsiDirectoryNode" />
-              <item name="-private" type="462c0819:PsiDirectoryNode" />
-              <item name="store" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ember-blueprint-data" type="b2602c69:ProjectViewProjectNode" />
@@ -350,24 +321,24 @@
       <workItem from="1542858117546" duration="1322000" />
       <workItem from="1543542694241" duration="2085000" />
       <workItem from="1545267830263" duration="3597000" />
-      <workItem from="1546632882172" duration="302000" />
+      <workItem from="1546632882172" duration="1277000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20472000" />
+    <option name="totallyTimeSpent" value="21447000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="798" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.22057787" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.22057787" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="npm" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5109232" side_tool="true" weight="0.3288889" />
       <window_info anchor="bottom" id="Version Control" order="1" weight="0.3288889" />
-      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" visible="true" weight="0.32650074" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" visible="true" weight="0.32650074" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.3288889" />
       <window_info anchor="bottom" id="Run" order="5" sideWeight="0.4855532" weight="0.4649123" />
@@ -485,16 +456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/addon/mixins/serializers/mongodb.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1794">
-          <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/addon/resource-stat.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -526,6 +487,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/addon/initializers/ember-blueprint-data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/addon/-private/model/changed-attributes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
@@ -533,12 +504,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/addon/initializers/ember-blueprint-data.js">
+    <entry file="file://$PROJECT_DIR$/addon/mixins/serializers/mongodb.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="81">
+          <caret line="58" column="31" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
