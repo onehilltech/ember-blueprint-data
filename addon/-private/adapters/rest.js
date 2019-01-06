@@ -21,14 +21,18 @@ export default {
     return query;
   },
 
-  search (store, type, query) {
+  search (store, type, query, recordArray, options, directives) {
+    const { adapterOptions } = options;
+
     let url = this.buildURL (type.modelName, null, null, 'search', query);
     url += '/search';
 
     return this.ajax (url, 'POST', {
       data: {
         search: {
-          query
+          query,
+          options: adapterOptions,
+          _: directives
         }
       }
     });
