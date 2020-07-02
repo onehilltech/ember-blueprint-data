@@ -24,6 +24,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -98,7 +99,8 @@
       <workItem from="1543542694241" duration="2085000" />
       <workItem from="1545267830263" duration="3597000" />
       <workItem from="1546632882172" duration="2598000" />
-      <workItem from="1593567394724" duration="121000" />
+      <workItem from="1593567394724" duration="902000" />
+      <workItem from="1593714947230" duration="61000" />
     </task>
     <servers />
   </component>

@@ -80,7 +80,8 @@ export default Mixin.create ({
         let resource = payload[key];
 
         resource.forEach ((rc, i) => {
-          response.data[i].attributes.stat =  this._normalizeResourceStat (rc._stat);
+          if (!!rc._stat)
+            response.data[i].attributes.stat =  this._normalizeResourceStat (rc._stat);
         });
 
         break;
@@ -108,7 +109,7 @@ export default Mixin.create ({
           resource = resource.length > 0 ? resource[0] : undefined;
         }
 
-        if (resource && resource._stat) {
+        if (resource && !!resource._stat) {
           let stat = this._normalizeResourceStat (resource._stat);
           response.data.attributes.stat = stat;
         }
