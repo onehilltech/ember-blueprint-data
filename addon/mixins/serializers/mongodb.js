@@ -66,8 +66,7 @@ export default Mixin.create ({
   },
 
   normalizeFindAllResponse (store, primaryModelClass, payload, id, requestType) {
-    // Let the base class create the default response.
-    let response = this._super (...arguments);
+    let response = this._super (store, primaryModelClass, this._normalizePayload (store, payload), id, requestType);
 
     const keys = Object.keys (payload);
 
@@ -159,5 +158,71 @@ export default Mixin.create ({
     }
 
     return stat;
+  },
+
+  /**
+   * Normalize the payload for processing.
+   *
+   * @param store
+   * @param payload
+   */
+  _normalizePayload (store, payload) {
+    let keys = Object.keys (payload);
+    let references = {};
+
+    keys.forEach (key => {
+      const modelName = singularize (key);
+      const Model = store.modelFor (modelName);
+
+      // We only care about the relationships in for for this model at this point. We need to
+      // flatten those that are objects in the payload into reference ids.
+
+      let values = payload[key];
+
+      Model.eachRelationship (relationshipName => {
+        let relationship = Model.relationshipsByName.get (relationshipName);
+        let referencesName = pluralize (relationship.type);
+        let serializer = store.serializerFor (relationship.type);
+        let primaryKey = serializer.primaryKey;
+
+        if (Array.isArray (values)) {
+          // Iterate over each value in the payload and process this relationship.
+          payload[key] = values.map (value => {
+            switch (relationship.kind) {
+              case 'hasMany':
+                // The reference is a collection of references. We need to iterate over each entry
+                // in the references and flatten it accordingly.
+
+                value[relationship.key] = value[relationship.key].map (ref => {
+                  // We only process objects that do not have 'type' attribute. If there is a type
+                  // attribute, then we assume the reference is in the correct format.
+
+                  if (typeof ref !== 'object' || ref === null || !!ref.type)
+                    return ref;
+
+                  // Replace the object with a reference id.
+                  let refId = ref[primaryKey];
+                  (references[referencesName] = references[referencesName] || []).push (ref);
+
+                  return refId;
+                });
+                break;
+            }
+
+            return value;
+          });
+        }
+      });
+    });
+
+    // Include the references in the payload.
+    if (Object.keys (references).length === 0)
+      return Object.assign ({}, payload, references);
+
+    return Object.assign ({}, payload, references, this._normalizePayload (store, references));
+  },
+
+  _normalizeArrayRelationship () {
+
   }
 });
