@@ -65,29 +65,14 @@ export default Mixin.create ({
     }
   },
 
+  normalizeFindRecordResponse (store, primaryModelClass, payload, id, requestType) {
+    let response = this._super (store, primaryModelClass, this._normalizePayload (store, payload), id, requestType);
+    return this._includeResourceStats (response, store, primaryModelClass, payload);
+  },
+
   normalizeFindAllResponse (store, primaryModelClass, payload, id, requestType) {
     let response = this._super (store, primaryModelClass, this._normalizePayload (store, payload), id, requestType);
-
-    const keys = Object.keys (payload);
-
-    for (let i = 0; i < keys.length; ++ i) {
-      const key = keys[i];
-      const singular = singularize (key);
-      const isPrimaryType = this.isPrimaryType (store, singular, primaryModelClass);
-
-      if (isPrimaryType) {
-        let resource = payload[key];
-
-        resource.forEach ((rc, i) => {
-          if (!!rc._stat)
-            response.data[i].attributes.stat =  this._normalizeResourceStat (rc._stat);
-        });
-
-        break;
-      }
-    }
-
-    return response;
+    return this._includeResourceStats (response, store, primaryModelClass, payload);
   },
 
   normalizeSingleResponse (store, primaryModelClass, payload, id, requestType) {
@@ -139,7 +124,41 @@ export default Mixin.create ({
 
     delete payload[plural];
 
-    return this._super (store, primaryModelClass, payload, id, requestType);
+    let response = this._super (store, primaryModelClass, payload, id, requestType);
+    return this._includeResourceStats (response, store, primaryModelClass, payload);
+  },
+
+  /**
+   * Include the resource stats in the data models.
+   *
+   * @param response
+   * @param store
+   * @param primaryModelClass
+   * @param payload
+   * @returns {*}
+   * @private
+   */
+  _includeResourceStats (response, store, primaryModelClass, payload) {
+    const keys = Object.keys (payload);
+
+    for (let i = 0; i < keys.length; ++ i) {
+      const key = keys[i];
+      const singular = singularize (key);
+      const isPrimaryType = this.isPrimaryType (store, singular, primaryModelClass);
+
+      if (isPrimaryType) {
+        let resource = payload[key];
+
+        resource.forEach ((rc, i) => {
+          if (!!rc._stat)
+            response.data[i].attributes.stat =  this._normalizeResourceStat (rc._stat);
+        });
+
+        break;
+      }
+    }
+
+    return response;
   },
 
   _normalizeResourceStat (payload) {
