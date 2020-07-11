@@ -149,10 +149,17 @@ export default Mixin.create ({
       if (isPrimaryType) {
         let resource = payload[key];
 
-        resource.forEach ((rc, i) => {
-          if (!!rc._stat)
-            response.data[i].attributes.stat =  this._normalizeResourceStat (rc._stat);
-        });
+        if (Array.isArray (resource)) {
+          resource.forEach ((rc, i) => {
+            if (!!rc._stat)
+              response.data[i].attributes.stat =  this._normalizeResourceStat (rc._stat);
+          });
+        }
+        else {
+          if (!!resource._stat)
+            response.data.attributes.stat = this._normalizeResourceStat (resource._stat);
+        }
+
 
         break;
       }
@@ -204,32 +211,37 @@ export default Mixin.create ({
         let serializer = store.serializerFor (relationship.type);
         let primaryKey = serializer.primaryKey;
 
+        function normalize (value) {
+          switch (relationship.kind) {
+            case 'hasMany':
+              // The reference is a collection of references. We need to iterate over each entry
+              // in the references and flatten it accordingly.
+
+              value[relationship.key] = value[relationship.key].map (ref => {
+                // We only process objects that do not have 'type' attribute. If there is a type
+                // attribute, then we assume the reference is in the correct format.
+
+                if (typeof ref !== 'object' || ref === null || !!ref.type)
+                  return ref;
+
+                // Replace the object with a reference id.
+                let refId = ref[primaryKey];
+                (references[referencesName] = references[referencesName] || []).push (ref);
+
+                return refId;
+              });
+              break;
+          }
+
+          return value;
+        }
+
         if (Array.isArray (values)) {
           // Iterate over each value in the payload and process this relationship.
-          payload[key] = values.map (value => {
-            switch (relationship.kind) {
-              case 'hasMany':
-                // The reference is a collection of references. We need to iterate over each entry
-                // in the references and flatten it accordingly.
-
-                value[relationship.key] = value[relationship.key].map (ref => {
-                  // We only process objects that do not have 'type' attribute. If there is a type
-                  // attribute, then we assume the reference is in the correct format.
-
-                  if (typeof ref !== 'object' || ref === null || !!ref.type)
-                    return ref;
-
-                  // Replace the object with a reference id.
-                  let refId = ref[primaryKey];
-                  (references[referencesName] = references[referencesName] || []).push (ref);
-
-                  return refId;
-                });
-                break;
-            }
-
-            return value;
-          });
+          payload[key] = values.map (normalize);
+        }
+        else {
+          payload[key] = normalize (values);
         }
       });
     });
@@ -239,9 +251,5 @@ export default Mixin.create ({
       return Object.assign ({}, payload, references);
 
     return Object.assign ({}, payload, references, this._normalizePayload (store, references));
-  },
-
-  _normalizeArrayRelationship () {
-
   }
 });
