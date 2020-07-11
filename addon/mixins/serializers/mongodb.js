@@ -1,5 +1,4 @@
 import Mixin from '@ember/object/mixin';
-import ResourceStat from '../../resource-stat';
 
 import { underscore } from '@ember/string';
 import { isPresent, isNone } from '@ember/utils';
@@ -216,6 +215,9 @@ export default Mixin.create ({
             case 'hasMany':
               // The reference is a collection of references. We need to iterate over each entry
               // in the references and flatten it accordingly.
+
+              if (isNone (value[relationship.key]))
+                return undefined;
 
               value[relationship.key] = value[relationship.key].map (ref => {
                 // We only process objects that do not have 'type' attribute. If there is a type
