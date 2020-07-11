@@ -76,32 +76,8 @@ export default Mixin.create ({
 
   normalizeSingleResponse (store, primaryModelClass, payload, id, requestType) {
     // Let the base class create the default response.
-    let response = this._super (...arguments);
-
-    const keys = Object.keys (payload);
-
-    for (let i = 0; i < keys.length; ++ i) {
-      const key = keys[i];
-      const singular = singularize (key);
-      const isPrimaryType = this.isPrimaryType (store, singular, primaryModelClass);
-
-      if (isPrimaryType) {
-        let resource = payload[key];
-
-        if (Array.isArray (resource)) {
-          resource = resource.length > 0 ? resource[0] : undefined;
-        }
-
-        if (resource && !!resource._stat) {
-          let stat = this._normalizeResourceStat (resource._stat);
-          response.data.attributes.stat = stat;
-        }
-
-        break;
-      }
-    }
-
-    return response;
+    let response = this._super (store, primaryModelClass, this._normalizePayload (store, payload), id, requestType);
+    return this._includeResourceStats (response, store, primaryModelClass, payload);
   },
 
   /**
