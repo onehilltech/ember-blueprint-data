@@ -64,18 +64,13 @@ export default Mixin.create ({
     }
   },
 
-  normalizeFindRecordResponse (store, primaryModelClass, payload, id, requestType) {
-    let response = this._super (store, primaryModelClass, this._normalizePayload (store, payload), id, requestType);
-    return this._includeResourceStats (response, store, primaryModelClass, payload);
-  },
-
-  normalizeFindAllResponse (store, primaryModelClass, payload, id, requestType) {
-    let response = this._super (store, primaryModelClass, this._normalizePayload (store, payload), id, requestType);
-    return this._includeResourceStats (response, store, primaryModelClass, payload);
-  },
-
   normalizeSingleResponse (store, primaryModelClass, payload, id, requestType) {
     // Let the base class create the default response.
+    let response = this._super (store, primaryModelClass, this._normalizePayload (store, payload), id, requestType);
+    return this._includeResourceStats (response, store, primaryModelClass, payload);
+  },
+
+  normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
     let response = this._super (store, primaryModelClass, this._normalizePayload (store, payload), id, requestType);
     return this._includeResourceStats (response, store, primaryModelClass, payload);
   },
@@ -96,11 +91,9 @@ export default Mixin.create ({
     let singular = singularize (primaryModelClass.modelName);
 
     payload[singular] = payload[plural][0];
-
     delete payload[plural];
 
-    let response = this._super (store, primaryModelClass, payload, id, requestType);
-    return this._includeResourceStats (response, store, primaryModelClass, payload);
+    return this._super (store, primaryModelClass, payload, id, requestType);
   },
 
   /**
