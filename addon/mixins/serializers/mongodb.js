@@ -186,7 +186,7 @@ export default Mixin.create ({
               // in the references and flatten it accordingly.
 
               if (isNone (value[relationship.key]))
-                return undefined;
+                return value;
 
               value[relationship.key] = value[relationship.key].map (ref => {
                 // We only process objects that do not have 'type' attribute. If there is a type
