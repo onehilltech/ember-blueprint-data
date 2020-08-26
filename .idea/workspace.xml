@@ -82,6 +82,7 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -106,12 +107,14 @@
       <workItem from="1593832223145" duration="1878000" />
       <workItem from="1594419282193" duration="2033000" />
       <workItem from="1594505230728" duration="2165000" />
-      <workItem from="1594842173843" duration="648000" />
+      <workItem from="1594842173843" duration="1357000" />
+      <workItem from="1596723179979" duration="1138000" />
+      <workItem from="1598446241985" duration="17000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="masterDetails">
     <states>

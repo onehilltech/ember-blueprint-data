@@ -180,6 +180,17 @@ export default Mixin.create ({
         let primaryKey = serializer.primaryKey;
 
         function normalize (value) {
+          function handleRef (ref) {
+            if (typeof ref !== 'object' || ref === null || !!ref.type)
+              return ref;
+
+            // Replace the object with a reference id.
+            let refId = ref[primaryKey];
+            (references[referencesName] = references[referencesName] || []).push (ref);
+
+            return refId;
+          }
+
           switch (relationship.kind) {
             case 'hasMany':
               // The reference is a collection of references. We need to iterate over each entry
@@ -188,19 +199,15 @@ export default Mixin.create ({
               if (isNone (value[relationship.key]))
                 return value;
 
-              value[relationship.key] = value[relationship.key].map (ref => {
-                // We only process objects that do not have 'type' attribute. If there is a type
-                // attribute, then we assume the reference is in the correct format.
+              value[relationship.key] = value[relationship.key].map (handleRef);
+              break;
 
-                if (typeof ref !== 'object' || ref === null || !!ref.type)
-                  return ref;
+            case 'belongsTo':
+              if (isNone (value[relationship.key]))
+                return value;
 
-                // Replace the object with a reference id.
-                let refId = ref[primaryKey];
-                (references[referencesName] = references[referencesName] || []).push (ref);
+              value[relationship.key] = handleRef (value[relationship.key]);
 
-                return refId;
-              });
               break;
           }
 
