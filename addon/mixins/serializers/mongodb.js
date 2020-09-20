@@ -117,17 +117,18 @@ export default Mixin.create ({
       if (isPrimaryType) {
         let resource = payload[key];
 
-        if (Array.isArray (resource)) {
-          resource.forEach ((rc, i) => {
-            if (!!rc._stat)
-              response.data[i].attributes.stat =  this._normalizeResourceStat (rc._stat);
-          });
+        if (isPresent (resource)) {
+          if (Array.isArray (resource)) {
+            resource.forEach ((rc, i) => {
+              if (!!rc._stat)
+                response.data[i].attributes.stat =  this._normalizeResourceStat (rc._stat);
+            });
+          }
+          else {
+            if (!!resource._stat)
+              response.data.attributes.stat = this._normalizeResourceStat (resource._stat);
+          }
         }
-        else {
-          if (!!resource._stat)
-            response.data.attributes.stat = this._normalizeResourceStat (resource._stat);
-        }
-
 
         break;
       }
@@ -191,20 +192,26 @@ export default Mixin.create ({
             return refId;
           }
 
+          if (isNone (value)) {
+            return value
+          }
+
           switch (relationship.kind) {
             case 'hasMany':
               // The reference is a collection of references. We need to iterate over each entry
               // in the references and flatten it accordingly.
 
-              if (isNone (value[relationship.key]))
+              if (isNone (value[relationship.key])) {
                 return value;
+              }
 
               value[relationship.key] = value[relationship.key].map (handleRef);
               break;
 
             case 'belongsTo':
-              if (isNone (value[relationship.key]))
+              if (isNone (value[relationship.key])) {
                 return value;
+              }
 
               value[relationship.key] = handleRef (value[relationship.key]);
 
