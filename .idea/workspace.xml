@@ -13,11 +13,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="798" />
-  </component>
   <component name="ProjectId" id="1e44B42ZJTr65ITImYBJlx8q0sc" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,6 +29,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="copyright.profiles" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -110,7 +106,10 @@
       <workItem from="1594842173843" duration="1357000" />
       <workItem from="1596723179979" duration="1138000" />
       <workItem from="1598446241985" duration="1268000" />
-      <workItem from="1600567372617" duration="7000" />
+      <workItem from="1600567372617" duration="227000" />
+      <workItem from="1600567607915" duration="59000" />
+      <workItem from="1600568508583" duration="528000" />
+      <workItem from="1603218815047" duration="14000" />
     </task>
     <servers />
   </component>
