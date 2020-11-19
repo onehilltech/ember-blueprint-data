@@ -33,7 +33,7 @@ export default Mixin.create ({
 
     const changed = snapshot.changedAttributes ();
 
-    if (isNone (changed[key])) {
+    if (isNone (changed[key]) && options.serialize !== 'always') {
       return;
     }
 
