@@ -39,7 +39,7 @@ export default Mixin.create ({
 
     // Check if the attribute is one that we never serialize in the request. If
     // we should not serialize the attribute, then we can just return.
-    if (isPresent (options.serialize) && options.serialize === false) {
+    if (isPresent (options.serialize) && (options.serialize === false || options.serialize === 'false')) {
       return;
     }
 
