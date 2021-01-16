@@ -29,18 +29,18 @@ export default Mixin.create ({
    * @return {*}
    */
   serializeAttribute (snapshot, json, key, attribute) {
-    const { options } = attribute;
+    const { options: { serialize }, isFragment } = attribute;
 
     const changed = snapshot.changedAttributes ();
 
     // The isFragment check is added to support ember-data-model-fragments.
-    if (!attribute.isFragment && isNone (changed[key]) && options.serialize !== 'always') {
+    if (!isFragment && isNone (changed[key]) && serialize !== 'always') {
       return;
     }
 
     // Check if the attribute is one that we never serialize in the request. If
     // we should not serialize the attribute, then we can just return.
-    if (isPresent (options.serialize) && (options.serialize === false || options.serialize === 'false')) {
+    if (isPresent (serialize) && (serialize === false || serialize === 'false')) {
       return;
     }
 
