@@ -33,7 +33,8 @@ export default Mixin.create ({
 
     const changed = snapshot.changedAttributes ();
 
-    if (isNone (changed[key]) && options.serialize !== 'always') {
+    // The isFragment check is added to support ember-data-model-fragments.
+    if (!attribute.isFragment && isNone (changed[key]) && options.serialize !== 'always') {
       return;
     }
 
