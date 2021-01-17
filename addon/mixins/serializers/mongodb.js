@@ -1,7 +1,7 @@
 import Mixin from '@ember/object/mixin';
 
 import { underscore } from '@ember/string';
-import { isPresent, isNone } from '@ember/utils';
+import { isEmpty, isPresent, isNone } from '@ember/utils';
 
 import { singularize, pluralize } from 'ember-inflector';
 
@@ -33,18 +33,35 @@ export default Mixin.create ({
 
     const changed = snapshot.changedAttributes ();
 
-    // The isFragment check is added to support ember-data-model-fragments.
-    if (!isFragment && isNone (changed[key]) && serialize !== 'always') {
+    if (serialize === 'always') {
+      // The user always wants to serialize this attribute.
+      return this._super (...arguments);
+    }
+    else if (isFragment) {
+      this._super (...arguments);
+
+      // When dealing with a fragment, we delete the value if there is no
+      // serialized data. Otherwise, we end up with a bunch of empty nested
+      // objects.
+
+      let payloadKey = this._getMappedKey (key, snapshot.type);
+
+      if (payloadKey === key && this.keyForAttribute) {
+        payloadKey = this.keyForAttribute (key, 'serialize');
+      }
+
+      if (isEmpty (Object.keys (json[payloadKey]))) {
+        delete json[payloadKey];
+      }
+    }
+    else if (isNone (changed[key])) {
+      // This attribute did not change. There is nothing to serialize.
       return;
     }
-
-    // Check if the attribute is one that we never serialize in the request. If
-    // we should not serialize the attribute, then we can just return.
-    if (isPresent (serialize) && (serialize === false || serialize === 'false')) {
-      return;
+    else {
+      // The attribute has changed.
+      return this._super (...arguments);
     }
-
-    return this._super (snapshot, json, key, attribute);
   },
 
   /**
