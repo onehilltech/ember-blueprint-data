@@ -48,7 +48,9 @@ export default Mixin.create ({
         payloadKey = this.keyForAttribute (key, 'serialize');
       }
 
-      if (isEmpty (Object.keys (json[payloadKey]))) {
+      let payload = json[payloadKey];
+
+      if (isPresent (payload) && isEmpty (payload)) {
         delete json[payloadKey];
       }
     }
