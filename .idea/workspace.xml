@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="455a154a-5cc8-4654-80ac-2c1ef54a9a15" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/addon/serialize-and-push.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/addon/serialize-and-push.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/serialize-and-push.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +114,7 @@
       <workItem from="1605757604228" duration="96000" />
       <workItem from="1605758123363" duration="10000" />
       <workItem from="1605758159749" duration="730000" />
-      <workItem from="1610829780790" duration="3186000" />
+      <workItem from="1610829780790" duration="3865000" />
     </task>
     <servers />
   </component>
