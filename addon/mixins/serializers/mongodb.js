@@ -33,11 +33,11 @@ export default Mixin.create ({
 
     const changed = snapshot.changedAttributes ();
 
-    if (serialize === 'always') {
-      // The user always wants to serialize this attribute.
-      return this._super (...arguments);
+    if (serialize === 'always' || isFragment || isPresent (changed[key])) {
+      this._super (...arguments);
     }
-    else if (isFragment) {
+
+    if (isFragment) {
       // When dealing with a fragment, we delete the value if there is no
       // serialized data. Otherwise, we end up with a bunch of empty nested
       // objects.
@@ -50,17 +50,9 @@ export default Mixin.create ({
 
       let payload = json[payloadKey];
 
-      if (isPresent (payload) && isEmpty (payload)) {
+      if (isPresent (payload) && isEmpty (Object.keys (payload))) {
         delete json[payloadKey];
       }
-    }
-    else if (isNone (changed[key])) {
-      // This attribute did not change. There is nothing to serialize.
-      return;
-    }
-    else {
-      // The attribute has changed.
-      return this._super (...arguments);
     }
   },
 
