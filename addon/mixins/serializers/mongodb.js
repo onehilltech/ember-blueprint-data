@@ -38,8 +38,6 @@ export default Mixin.create ({
       return this._super (...arguments);
     }
     else if (isFragment) {
-      this._super (...arguments);
-
       // When dealing with a fragment, we delete the value if there is no
       // serialized data. Otherwise, we end up with a bunch of empty nested
       // objects.
