@@ -20,6 +20,17 @@ export default Mixin.create ({
   },
 
   /**
+   * Get the key for an relationship by converting from underscores to
+   * camel case.
+   *
+   * @param key
+   * @return {*}
+   */
+  keyForRelationship: function (key) {
+    return underscore (key);
+  },
+
+  /**
    * Serialize an attribute. Be default, we only serialize attributes that have changed.
    *
    * @param snapshot
