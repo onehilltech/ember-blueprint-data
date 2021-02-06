@@ -204,6 +204,7 @@ export default Mixin.create ({
         let referencesName = pluralize (relationship.type);
         let serializer = store.serializerFor (relationship.type);
         let primaryKey = serializer.primaryKey;
+        let relationshipKey = serializer.keyForRelationship (relationship.key, relationship, 'deserialize');
 
         function normalize (value) {
           function handleRef (ref) {
@@ -226,19 +227,19 @@ export default Mixin.create ({
               // The reference is a collection of references. We need to iterate over each entry
               // in the references and flatten it accordingly.
 
-              if (isNone (value[relationship.key])) {
+              if (isNone (value[relationshipKey])) {
                 return value;
               }
 
-              value[relationship.key] = value[relationship.key].map (handleRef);
+              value[relationshipKey] = value[relationshipKey].map (handleRef);
               break;
 
             case 'belongsTo':
-              if (isNone (value[relationship.key])) {
+              if (isNone (value[relationshipKey])) {
                 return value;
               }
 
-              value[relationship.key] = handleRef (value[relationship.key]);
+              value[relationshipKey] = handleRef (value[relationshipKey]);
 
               break;
           }
