@@ -191,7 +191,7 @@ export default Mixin.create ({
     let references = {};
 
     keys.forEach (key => {
-      const modelName = singularize (key);
+      const modelName = this.modelNameFromPayloadKey (key);
       const Model = store.modelFor (modelName);
 
       // We only care about the relationships in for for this model at this point. We need to
