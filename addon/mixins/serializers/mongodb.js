@@ -110,13 +110,16 @@ export default Mixin.create ({
   normalizeQueryRecordResponse (store, primaryModelClass, payload, id, requestType) {
     let plural = pluralize (primaryModelClass.modelName);
     let singular = singularize (primaryModelClass.modelName);
-    let [value] = payload[plural];
 
-    if (isPresent (value)) {
-      payload[singular] = value;
+    if (isPresent (payload[plural])) {
+      let [value] = payload[plural];
+
+      if (isPresent (value)) {
+        payload[singular] = value;
+      }
+
+      delete payload[plural];
     }
-
-    delete payload[plural];
 
     return this._super (store, primaryModelClass, payload, id, requestType);
   },
