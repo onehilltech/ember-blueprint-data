@@ -61,7 +61,7 @@ export default Mixin.create ({
 
       let payload = json[payloadKey];
 
-      if (isPresent (payload) && isEmpty (Object.keys (payload))) {
+      if (isNone (payload) || (isPresent (payload) && isEmpty (Object.keys (payload)))) {
         delete json[payloadKey];
       }
     }
