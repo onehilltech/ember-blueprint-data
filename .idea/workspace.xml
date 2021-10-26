@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="455a154a-5cc8-4654-80ac-2c1ef54a9a15" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addon/mixins/serializers/mongodb.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/mixins/serializers/mongodb.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/addon/serialize-and-push.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/serialize-and-push.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +41,24 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="EMBER_SERVE_CONFIGURATION" factoryName="Ember serve configuration factory">
+      <option name="PORT" value="" />
+      <option name="HOST" value="" />
+      <option name="ENVIRONMENT" value="development" />
+      <option name="OUTPUT_PATH" value="" />
+      <option name="WATCHER" value="" />
+      <option name="PROXY" value="" />
+      <option name="PROXY_SECURE" value="true" />
+      <option name="PROXY_TRANSPARENT" value="true" />
+      <option name="LIVE_RELOAD" value="true" />
+      <option name="LIVE_RELOAD_HOST" value="" />
+      <option name="LIVE_RELOAD_BASE_URL" value="" />
+      <option name="LIVE_RELOAD_PORT" value="" />
+      <option name="SSL" value="false" />
+      <option name="SSL_KEY" value="" />
+      <option name="SSL_CERT" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Run application" type="EMBER_SERVE_CONFIGURATION" factoryName="Ember serve configuration factory">
       <option name="PORT" value="" />
       <option name="HOST" value="" />
@@ -58,24 +76,6 @@
       <option name="SSL_KEY" value="" />
       <option name="SSL_CERT" value="" />
       <module name="NAME" value="ember-blueprint-data" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="EMBER_SERVE_CONFIGURATION" factoryName="Ember serve configuration factory">
-      <option name="PORT" value="" />
-      <option name="HOST" value="" />
-      <option name="ENVIRONMENT" value="development" />
-      <option name="OUTPUT_PATH" value="" />
-      <option name="WATCHER" value="" />
-      <option name="PROXY" value="" />
-      <option name="PROXY_SECURE" value="true" />
-      <option name="PROXY_TRANSPARENT" value="true" />
-      <option name="LIVE_RELOAD" value="true" />
-      <option name="LIVE_RELOAD_HOST" value="" />
-      <option name="LIVE_RELOAD_BASE_URL" value="" />
-      <option name="LIVE_RELOAD_PORT" value="" />
-      <option name="SSL" value="false" />
-      <option name="SSL_KEY" value="" />
-      <option name="SSL_CERT" value="" />
       <method v="2" />
     </configuration>
   </component>
@@ -124,7 +124,9 @@
       <workItem from="1612633442339" duration="2271000" />
       <workItem from="1613346577325" duration="28000" />
       <workItem from="1617753343204" duration="609000" />
-      <workItem from="1618465228440" duration="1290000" />
+      <workItem from="1618465228440" duration="1928000" />
+      <workItem from="1619288873840" duration="9000" />
+      <workItem from="1635217618183" duration="16000" />
     </task>
     <servers />
   </component>
