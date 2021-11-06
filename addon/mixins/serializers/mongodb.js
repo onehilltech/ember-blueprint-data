@@ -2,6 +2,7 @@ import Mixin from '@ember/object/mixin';
 
 import { underscore } from '@ember/string';
 import { isEmpty, isPresent, isNone } from '@ember/utils';
+import { get } from '@ember/object';
 
 import { singularize, pluralize } from 'ember-inflector';
 
@@ -147,14 +148,21 @@ export default Mixin.create ({
 
         if (isPresent (resource)) {
           if (Array.isArray (resource)) {
-            resource.forEach ((rc, i) => {
-              if (!!rc._stat)
-                response.data[i].attributes.stat =  this._normalizeResourceStat (rc._stat);
-            });
+            if (Array.isArray (response.data)) {
+              resource.forEach ((rc, i) => {
+                if (!!rc._stat) {
+                  response.data[i].attributes.stat =  this._normalizeResourceStat (rc._stat);
+                }
+              });
+            }
+            else {
+              response.data.attributes.stat = this._normalizeResourceStat (resource[0]._stat);
+            }
           }
           else {
-            if (!!resource._stat)
+            if (!!resource._stat) {
               response.data.attributes.stat = this._normalizeResourceStat (resource._stat);
+            }
           }
         }
 
@@ -204,15 +212,18 @@ export default Mixin.create ({
 
       Model.eachRelationship (relationshipName => {
         let relationship = Model.relationshipsByName.get (relationshipName);
+        let relationshipModel = store.modelFor (relationship.type);
         let referencesName = pluralize (relationship.type);
         let serializer = store.serializerFor (relationship.type);
         let primaryKey = serializer.primaryKey;
         let relationshipKey = serializer.keyForRelationship (relationship.key, relationship, 'deserialize');
+        let hasTypeAttribute = modelHasAttributeOrRelationshipNamedType (relationshipModel);
 
         function normalize (value) {
           function handleRef (ref) {
-            if (typeof ref !== 'object' || ref === null || !!ref.type)
+            if (typeof ref !== 'object' || ref === null || (!!ref.type && !hasTypeAttribute)) {
               return ref;
+            }
 
             // Replace the object with a reference id.
             let refId = ref[primaryKey];
@@ -261,9 +272,22 @@ export default Mixin.create ({
     });
 
     // Include the references in the payload.
-    if (Object.keys (references).length === 0)
+    if (Object.keys (references).length === 0) {
       return Object.assign ({}, payload, references);
+    }
 
     return Object.assign ({}, payload, references, this._normalizePayload (store, references));
   }
 });
+
+/**
+ * Check if the model class as the type attribute.
+ *
+ * Credit for this code below goes to the @ember-data. It is part or their private methods.
+ *
+ * @param modelClass
+ * @returns {*}
+ */
+function modelHasAttributeOrRelationshipNamedType (modelClass) {
+  return get (modelClass, 'attributes').has ('type') || get (modelClass, 'relationshipsByName').has('type');
+}
