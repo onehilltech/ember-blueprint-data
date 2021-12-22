@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="455a154a-5cc8-4654-80ac-2c1ef54a9a15" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/addon/serialize.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/addon/mixins/serializers/mongodb.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/mixins/serializers/mongodb.js" afterDir="false" />
     </list>
@@ -22,7 +23,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/addon" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="$PROJECT_DIR$/node_modules/eslint" />
@@ -130,7 +131,11 @@
       <workItem from="1635272930208" duration="735000" />
       <workItem from="1635389662337" duration="3036000" />
       <workItem from="1635811537567" duration="541000" />
-      <workItem from="1635960085257" duration="527000" />
+      <workItem from="1635960085257" duration="1318000" />
+      <workItem from="1637161987751" duration="598000" />
+      <workItem from="1637191941616" duration="2744000" />
+      <workItem from="1638208195210" duration="598000" />
+      <workItem from="1640193984112" duration="15000" />
     </task>
     <servers />
   </component>
