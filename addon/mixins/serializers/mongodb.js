@@ -160,7 +160,11 @@ export default Mixin.create ({
               });
             }
             else {
-              response.data.attributes.stat = this._normalizeResourceStat (resource[0]._stat);
+              const stat = resource[0]._stat;
+
+              if (!!stat) {
+                response.data.attributes.stat = this._normalizeResourceStat (stat);
+              }
             }
           }
           else {
