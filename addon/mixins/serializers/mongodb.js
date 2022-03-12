@@ -101,7 +101,16 @@ export default Mixin.create ({
     const { options: { serialize } } = relationship;
 
     if (serialize !== false) {
-      this._super (...arguments);
+      if (serialize === 'embed') {
+        // We are going to embed each of the documents instead of only including their
+        // id when we serialize them.
+        throw new Error ('We do not support embedding hasMany relationships.')
+      }
+      else {
+        // The documents are not embedded. This means we fallback to the default behavior
+        // of has many relationships where we only include the ids.
+        this._super (...arguments);
+      }
     }
   },
 
