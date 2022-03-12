@@ -90,6 +90,21 @@ export default Mixin.create ({
     }
   },
 
+  /**
+   * Serialize the hasMany relationship in a model.
+   *
+   * @param snapshot
+   * @param json
+   * @param relationship
+   */
+  serializeHasMany(snapshot, json, relationship) {
+    const { options: { serialize } } = relationship;
+
+    if (serialize !== false) {
+      this._super (...arguments);
+    }
+  },
+
   normalizeSingleResponse (store, primaryModelClass, payload, id, requestType) {
     // Let the base class create the default response.
     let response = this._super (store, primaryModelClass, this._normalizePayload (store, payload), id, requestType);
