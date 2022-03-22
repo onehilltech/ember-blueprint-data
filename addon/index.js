@@ -7,3 +7,4 @@ DS.ResourceStat = ResourceStat;
 
 export default DS;
 export { default as serializeAndPush } from './serialize-and-push';
+export { default as ResourceModel } from './resource';
