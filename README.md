@@ -4,6 +4,14 @@ ember-blueprint-data
 Support add-on for integrating Blueprint applications with ember-data.
 
 
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v3.12 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above
+
+
 Installation
 ------------------------------------------------------------------------------
 
