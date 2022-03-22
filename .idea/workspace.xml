@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="455a154a-5cc8-4654-80ac-2c1ef54a9a15" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/addon/models/resource-stats.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/addon/mixins/serializers/mongodb.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/mixins/serializers/mongodb.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/addon/resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/resource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +139,9 @@
       <workItem from="1637191941616" duration="2744000" />
       <workItem from="1638208195210" duration="598000" />
       <workItem from="1640193984112" duration="2962000" />
-      <workItem from="1647096894478" duration="1078000" />
+      <workItem from="1647096894478" duration="1595000" />
+      <workItem from="1647143131024" duration="5000" />
+      <workItem from="1647986865360" duration="1735000" />
     </task>
     <servers />
   </component>

@@ -114,17 +114,6 @@ export default Mixin.create ({
     }
   },
 
-  normalizeSingleResponse (store, primaryModelClass, payload, id, requestType) {
-    // Let the base class create the default response.
-    let response = this._super (store, primaryModelClass, this._normalizePayload (store, payload), id, requestType);
-    return this._includeResourceStats (response, store, primaryModelClass, payload);
-  },
-
-  normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
-    let response = this._super (store, primaryModelClass, this._normalizePayload (store, payload), id, requestType);
-    return this._includeResourceStats (response, store, primaryModelClass, payload);
-  },
-
   /**
    * Normalize a query record response by converting the plural envelope to a
    * singular envelope.
@@ -151,76 +140,6 @@ export default Mixin.create ({
     }
 
     return this._super (store, primaryModelClass, payload, id, requestType);
-  },
-
-  /**
-   * Include the resource stats in the data models.
-   *
-   * @param response
-   * @param store
-   * @param primaryModelClass
-   * @param payload
-   * @returns {*}
-   * @private
-   */
-  _includeResourceStats (response, store, primaryModelClass, payload) {
-    const keys = Object.keys (payload);
-
-    for (let i = 0; i < keys.length; ++ i) {
-      const key = keys[i];
-      const singular = singularize (key);
-      const isPrimaryType = this.isPrimaryType (store, singular, primaryModelClass);
-
-      if (isPrimaryType) {
-        let resource = payload[key];
-
-        if (isPresent (resource)) {
-          if (Array.isArray (resource)) {
-            if (Array.isArray (response.data)) {
-              resource.forEach ((rc, i) => {
-                if (!!rc._stat) {
-                  response.data[i].attributes.stat =  this._normalizeResourceStat (rc._stat);
-                }
-              });
-            }
-            else {
-              const stat = resource[0]._stat;
-
-              if (!!stat) {
-                response.data.attributes.stat = this._normalizeResourceStat (stat);
-              }
-            }
-          }
-          else {
-            if (!!resource._stat) {
-              response.data.attributes.stat = this._normalizeResourceStat (resource._stat);
-            }
-          }
-        }
-
-        break;
-      }
-    }
-
-    return response;
-  },
-
-  _normalizeResourceStat (payload) {
-    let stat = {};
-
-    if (payload.created_at) {
-      stat.createdAt = new Date (payload.created_at);
-    }
-
-    if (payload.updated_at) {
-      stat.updatedAt = new Date (payload.updated_at);
-    }
-
-    if (payload.deleted_at) {
-      stat.deletedAt = new Date (payload.deleted_at);
-    }
-
-    return stat;
   },
 
   /**
