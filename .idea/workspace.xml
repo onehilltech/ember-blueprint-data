@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="455a154a-5cc8-4654-80ac-2c1ef54a9a15" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.template-lintrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CONTRIBUTING.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/dummy/config/ember-cli-update.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/dummy/config/optional-features.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintignore" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.npmignore" beforeDir="false" afterPath="$PROJECT_DIR$/.npmignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/ember-try.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/ember-try.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testem.js" beforeDir="false" afterPath="$PROJECT_DIR$/testem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/dummy/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/dummy/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/dummy/app/resolver.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/dummy/app/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/dummy/app/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/dummy/app/templates/components/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/dummy/config/environment.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/dummy/config/environment.js" afterDir="false" />
-    </list>
+    <list default="true" id="455a154a-5cc8-4654-80ac-2c1ef54a9a15" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -155,7 +134,7 @@
       <workItem from="1640193984112" duration="2962000" />
       <workItem from="1647096894478" duration="1595000" />
       <workItem from="1647143131024" duration="5000" />
-      <workItem from="1647986865360" duration="2961000" />
+      <workItem from="1647986865360" duration="3649000" />
     </task>
     <servers />
   </component>
