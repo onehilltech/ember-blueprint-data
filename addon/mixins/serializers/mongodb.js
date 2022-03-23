@@ -114,6 +114,17 @@ export default Mixin.create ({
     }
   },
 
+  normalizeSingleResponse (store, primaryModelClass, payload, id, requestType) {
+    // Let the base class create the default response.
+    payload =  this._normalizePayload (store, payload);
+    return this._super (store, primaryModelClass, payload, id, requestType);
+  },
+
+  normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
+    payload = this._normalizePayload (store, payload);
+    return this._super (store, primaryModelClass, payload, id, requestType);
+  },
+
   /**
    * Normalize a query record response by converting the plural envelope to a
    * singular envelope.
