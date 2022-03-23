@@ -1,7 +1,7 @@
 import { attr } from '@ember-data/model';
 import MF from 'ember-data-model-fragments';
 
-export default class ResourceStatsFragment extends MF.Fragment {
+export default class ResourceStatFragment extends MF.Fragment {
   /// The date the resource was created.
   @attr('date')
   createdAt;

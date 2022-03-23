@@ -10,18 +10,18 @@ import { isPresent } from '@ember/utils';
  */
 export default class ResourceModel extends Model {
   /// The stats for the resource. This attribute should never be serialized.
-  @fragment('resource-stats', { serialize: false })
+  @fragment('resource-stat', { serialize: false })
   _stat;
 
   /// Get the stats for the resource.
-  get stats () {
+  get stat () {
     return this._stat;
   }
 
   /**
    * Test if the resource has stats.
    */
-  get hasStats () {
+  get hasStat () {
     return isPresent (this._stat);
   }
 }
