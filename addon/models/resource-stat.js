@@ -21,4 +21,10 @@ export default class ResourceStatFragment extends MF.Fragment {
   get isDeleted () {
     return !!this.deletedAt;
   }
+
+  /// Get the date the document was last modified. This can either be the update
+  /// date or the create date.
+  get lastModified () {
+    return this.updatedAt || this.createdAt;
+  }
 }
