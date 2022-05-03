@@ -45,7 +45,7 @@ export default Mixin.create ({
 
     const changed = snapshot.changedAttributes ();
 
-    if (serialize === 'always' || (isFragment && serialize !== false) || isPresent (changed[key])) {
+    if (serialize === 'always' || (serialize !== false && (isFragment || isPresent (changed[key])))) {
       this._super (...arguments);
     }
 
