@@ -84,7 +84,10 @@ export default Mixin.create ({
       let belongsTo = snapshot.belongsTo (key);
       key = this.keyForRelationship ? this.keyForRelationship (key, "belongsTo", "serialize") : key;
 
-      if (!isNone (belongsTo)) {
+      if (belongsTo === null) {
+        json[key] = null;
+      }
+      else if (!isNone (belongsTo)) {
         json[key] = belongsTo.id;
       }
     }
