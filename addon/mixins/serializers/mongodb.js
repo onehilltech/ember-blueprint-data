@@ -163,77 +163,82 @@ export default Mixin.create ({
    * @param payload
    */
   _normalizePayload (store, payload) {
-    let keys = Object.keys (payload);
-    let references = {};
+    const keys = Object.keys (payload);
+    const references = {};
 
     keys.forEach (key => {
-      const modelName = this.modelNameFromPayloadKey (key);
-      const Model = store.modelFor (modelName);
+      try {
+        const modelName = this.modelNameFromPayloadKey (key);
+        const Model = store.modelFor (modelName);
 
-      // We only care about the relationships in for for this model at this point. We need to
-      // flatten those that are objects in the payload into reference ids.
+        // We only care about the relationships in for for this model at this point. We need to
+        // flatten those that are objects in the payload into reference ids.
 
-      let values = payload[key];
+        let values = payload[key];
 
-      Model.eachRelationship (relationshipName => {
-        let relationship = Model.relationshipsByName.get (relationshipName);
-        let relationshipModel = store.modelFor (relationship.type);
-        let referencesName = pluralize (relationship.type);
-        let serializer = store.serializerFor (relationship.type);
-        let primaryKey = serializer.primaryKey;
-        let relationshipKey = serializer.keyForRelationship (relationship.key, relationship, 'deserialize');
-        let hasTypeAttribute = modelHasAttributeOrRelationshipNamedType (relationshipModel);
+        Model.eachRelationship (relationshipName => {
+          let relationship = Model.relationshipsByName.get (relationshipName);
+          let relationshipModel = store.modelFor (relationship.type);
+          let referencesName = pluralize (relationship.type);
+          let serializer = store.serializerFor (relationship.type);
+          let primaryKey = serializer.primaryKey;
+          let relationshipKey = serializer.keyForRelationship (relationship.key, relationship, 'deserialize');
+          let hasTypeAttribute = modelHasAttributeOrRelationshipNamedType (relationshipModel);
 
-        function normalize (value) {
-          function handleRef (ref) {
-            if (typeof ref !== 'object' || ref === null || (!!ref.type && !hasTypeAttribute)) {
-              return ref;
+          function normalize (value) {
+            function handleRef (ref) {
+              if (typeof ref !== 'object' || ref === null || (!!ref.type && !hasTypeAttribute)) {
+                return ref;
+              }
+
+              // Replace the object with a reference id.
+              let refId = ref[primaryKey];
+              (references[referencesName] = references[referencesName] || []).push (ref);
+
+              return refId;
             }
 
-            // Replace the object with a reference id.
-            let refId = ref[primaryKey];
-            (references[referencesName] = references[referencesName] || []).push (ref);
+            if (isNone (value)) {
+              return value
+            }
 
-            return refId;
+            switch (relationship.kind) {
+              case 'hasMany':
+                // The reference is a collection of references. We need to iterate over each entry
+                // in the references and flatten it accordingly.
+
+                if (isNone (value[relationshipKey])) {
+                  return value;
+                }
+
+                value[relationshipKey] = value[relationshipKey].map (handleRef);
+                break;
+
+              case 'belongsTo':
+                if (isNone (value[relationshipKey])) {
+                  return value;
+                }
+
+                value[relationshipKey] = handleRef (value[relationshipKey]);
+
+                break;
+            }
+
+            return value;
           }
 
-          if (isNone (value)) {
-            return value
+          if (Array.isArray (values)) {
+            // Iterate over each value in the payload and process this relationship.
+            payload[key] = values.map (normalize);
           }
-
-          switch (relationship.kind) {
-            case 'hasMany':
-              // The reference is a collection of references. We need to iterate over each entry
-              // in the references and flatten it accordingly.
-
-              if (isNone (value[relationshipKey])) {
-                return value;
-              }
-
-              value[relationshipKey] = value[relationshipKey].map (handleRef);
-              break;
-
-            case 'belongsTo':
-              if (isNone (value[relationshipKey])) {
-                return value;
-              }
-
-              value[relationshipKey] = handleRef (value[relationshipKey]);
-
-              break;
+          else {
+            payload[key] = normalize (values);
           }
-
-          return value;
-        }
-
-        if (Array.isArray (values)) {
-          // Iterate over each value in the payload and process this relationship.
-          payload[key] = values.map (normalize);
-        }
-        else {
-          payload[key] = normalize (values);
-        }
-      });
+        });
+      }
+      catch (err) {
+        console.warn (`We could not find a model for ${key}; we are skipping for now...`);
+      }
     });
 
     // Include the references in the payload.
