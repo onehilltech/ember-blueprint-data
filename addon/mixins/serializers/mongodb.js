@@ -177,14 +177,38 @@ export default Mixin.create ({
         let values = payload[key];
 
         Model.eachRelationship (relationshipName => {
-          let relationship = Model.relationshipsByName.get (relationshipName);
-          let relationshipModel = store.modelFor (relationship.type);
-          let referencesName = pluralize (relationship.type);
-          let serializer = store.serializerFor (relationship.type);
-          let primaryKey = serializer.primaryKey;
-          let relationshipKey = serializer.keyForRelationship (relationship.key, relationship, 'deserialize');
-          let hasTypeAttribute = modelHasAttributeOrRelationshipNamedType (relationshipModel);
+          const relationship = Model.relationshipsByName.get (relationshipName);
+          const { type: relationshipType, options: { polymorphic } } = relationship;
 
+          const relationshipModel = store.modelFor (relationshipType);
+          const referencesName = pluralize (relationshipType);
+          const serializer = store.serializerFor (relationshipType);
+          const primaryKey = serializer.primaryKey;
+          const relationshipKey = serializer.keyForRelationship (relationship.key, relationship, 'deserialize');
+          const hasTypeAttribute = modelHasAttributeOrRelationshipNamedType (relationshipModel);
+
+          if (polymorphic && !hasTypeAttribute) {
+            if (Array.isArray (values)) {
+              values.map (normalizePolymorphicValue.bind (this));
+            }
+            else {
+              normalizePolymorphicValue (values);
+            }
+          }
+          else {
+            if (Array.isArray (values)) {
+              payload[key] = values.map (normalize);
+            }
+            else {
+              payload[key] = normalize (values);
+            }
+          }
+
+          /**
+           * Helper function that normalizes a regular value.
+           *
+           * @param value           Value to normalize.
+           */
           function normalize (value) {
             function handleRef (ref) {
               if (typeof ref !== 'object' || ref === null || (!!ref.type && !hasTypeAttribute)) {
@@ -227,12 +251,32 @@ export default Mixin.create ({
             return value;
           }
 
-          if (Array.isArray (values)) {
-            // Iterate over each value in the payload and process this relationship.
-            payload[key] = values.map (normalize);
-          }
-          else {
-            payload[key] = normalize (values);
+          /**
+           * Helper function that normalizes the payload for a polymorphic type.
+           *
+           * @param value           Value to normalize
+           */
+          function normalizePolymorphicValue (value) {
+            // Locate the concrete instance in its abstract collection.
+            const instanceId = value[relationshipKey];
+
+            if (isNone (instanceId)) {
+              return;
+            }
+
+            const instance = payload[referencesName].find (element => element[primaryKey] === instanceId);
+
+            if (isPresent (instance)) {
+              // We need to relocate this object to a collection of its concrete types,
+              // and update this reference.
+
+              const concreteModelName = serializer.modelNameFromPayloadKey (instance.type);
+              const concreteTypeNames = pluralize (concreteModelName);
+
+              (payload[concreteTypeNames] = payload[concreteTypeNames] || []).push (instance);
+
+              value[relationshipKey] = { type: concreteModelName, id: instanceId };
+            }
           }
         });
       }
