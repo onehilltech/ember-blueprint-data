@@ -189,10 +189,15 @@ export default Mixin.create ({
 
           if (polymorphic && !hasTypeAttribute) {
             if (Array.isArray (values)) {
+              // Normalize the array of polymorphic value.
               values.map (normalizePolymorphicValue.bind (this));
             }
             else {
+              // Normalize the single polymorphic value.
               normalizePolymorphicValue (values);
+
+              // We can safely delete the old payload value.
+              delete payload[key];
             }
           }
           else {
