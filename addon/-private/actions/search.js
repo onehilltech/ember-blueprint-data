@@ -45,7 +45,10 @@ export default function (adapter, store, modelName, query, recordArray, options,
       );
 
       if (recordArray) {
-        recordArray._setInternalModels(internalModels, payload);
+        // _setInternalModels is for older version of @ember-data and _setObjects is for
+        // newer versions of @ember-data.
+        const setter = recordArray._setInternalModels || recordArray._setObjects;
+        setter.call (recordArray, internalModels, payload);
       }
       else {
         recordArray = store.recordArrayManager.createAdapterPopulatedRecordArray(
