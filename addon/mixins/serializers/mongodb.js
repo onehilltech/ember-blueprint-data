@@ -262,25 +262,55 @@ export default Mixin.create ({
            * @param value           Value to normalize
            */
           function normalizePolymorphicValue (value) {
-            // Locate the concrete instance in its abstract collection.
-            const instanceId = value[relationshipKey];
+            /**
+             * This helper method will convert an instance id to a JSON-API type descriptor. This
+             * is necessary to ensure the instance is cached correctly on the client side.
+             *
+             * @param instanceId        Instance id to convert.
+             */
+            function typeDescriptorForInstanceId (instanceId) {
+              // Locate the instance in the generic collection.
+              const instance = payload[referencesName].find (element => element[primaryKey] === instanceId);
 
-            if (isNone (instanceId)) {
-              return;
+              if (isPresent (instance)) {
+                // We need to relocate this object to a collection of its concrete types,
+                // and update this reference.
+
+                const concreteModelName = serializer.modelNameFromPayloadKey (instance.type);
+                const concreteTypeNames = pluralize (concreteModelName);
+
+                (payload[concreteTypeNames] = payload[concreteTypeNames] || []).push (instance);
+
+                // Return the type descriptor for this instance.
+                return { type: concreteModelName, id: instanceId };
+              }
+              else {
+                // Just return the instance id.
+                return instanceId;
+              }
             }
 
-            const instance = payload[referencesName].find (element => element[primaryKey] === instanceId);
+            switch (relationship.kind) {
+              case 'hasMany': {
+                // Get the collection of instance ids from the value. Then, let's map the
+                // instance ids to their corresponding type descriptor.
 
-            if (isPresent (instance)) {
-              // We need to relocate this object to a collection of its concrete types,
-              // and update this reference.
+                const instanceIds = value[relationshipKey];
 
-              const concreteModelName = serializer.modelNameFromPayloadKey (instance.type);
-              const concreteTypeNames = pluralize (concreteModelName);
+                if (isPresent (instanceIds)) {
+                  value[relationshipKey] = instanceIds.map (typeDescriptorForInstanceId);
+                }
+              }
+              break;
 
-              (payload[concreteTypeNames] = payload[concreteTypeNames] || []).push (instance);
+              case 'belongsTo': {
+                const instanceId = value[relationshipKey];
 
-              value[relationshipKey] = { type: concreteModelName, id: instanceId };
+                if (isPresent (instanceId)) {
+                  value[relationshipKey] = typeDescriptorForInstanceId (value[relationshipKey]) || instanceId;
+                }
+              }
+              break;
             }
           }
         });
