@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="455a154a-5cc8-4654-80ac-2c1ef54a9a15" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blueprints/ember-blueprint-data/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/ember-blueprint-data/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +161,8 @@
       <workItem from="1673319514775" duration="1380000" />
       <workItem from="1674053660483" duration="101000" />
       <workItem from="1683685649724" duration="856000" />
-      <workItem from="1712676183732" duration="962000" />
+      <workItem from="1712676183732" duration="1208000" />
+      <workItem from="1712680880566" duration="7000" />
     </task>
     <servers />
   </component>
