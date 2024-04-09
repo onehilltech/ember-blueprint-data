@@ -45,21 +45,5 @@ export default DS.RESTSerializer.extend (MongoDB, {
 });
 ```
 
-<<<<<<< HEAD
 Happy Coding!
-=======
 
-## Usage
-
-[Longer description of how to use the addon in apps.]
-
-
-## Contributing
-
-See the [Contributing](CONTRIBUTING.md) guide for details.
-
-
-## License
-
-This project is licensed under the [MIT License](LICENSE.md).
->>>>>>> 4fca2c9 (v3.18.0...v4.12.2)
