@@ -1,19 +1,16 @@
-ember-blueprint-data
-==============================================================================
+# ember-blueprint-data
 
 Support add-on for integrating Blueprint applications with ember-data.
 
 
-Compatibility
-------------------------------------------------------------------------------
+## Compatibility
 
-* Ember.js v3.12 or above
-* Ember CLI v2.13 or above
-* Node.js v10 or above
+* Ember.js v4.4 or above
+* Ember CLI v4.4 or above
+* Node.js v14 or above
 
 
-Installation
-------------------------------------------------------------------------------
+## Installation
 
 
     ember install ember-blueprint-data
@@ -48,4 +45,21 @@ export default DS.RESTSerializer.extend (MongoDB, {
 });
 ```
 
+<<<<<<< HEAD
 Happy Coding!
+=======
+
+## Usage
+
+[Longer description of how to use the addon in apps.]
+
+
+## Contributing
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).
+>>>>>>> 4fca2c9 (v3.18.0...v4.12.2)
