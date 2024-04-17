@@ -145,12 +145,11 @@ export default Mixin.create ({
 
     if (isPresent (payload[plural])) {
       let [value] = payload[plural];
+      delete payload[plural];
 
       if (isPresent (value)) {
         payload[singular] = value;
       }
-
-      delete payload[plural];
     }
 
     return this._super (store, primaryModelClass, payload, id, requestType);
